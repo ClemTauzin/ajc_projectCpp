@@ -1,3 +1,4 @@
+// Clément Tauzin
 #include <iostream>
 #include <string>
 #include <vector>
@@ -11,7 +12,7 @@ namespace Services {
         public:
         Service (const std::string& _nomService, int _prixService) : nomService(_nomService), prixService(_prixService) {};
 
-        virtual void afficherDetails(){
+        virtual void afficherDetails() {
             std::cout<<"Nom du service : "<< nomService << " ----> Prix (en €): " << prixService << std::endl;
         }
     };

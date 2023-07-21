@@ -1,8 +1,7 @@
 #include <iostream>
 #include <string>
 
-class Animal
-{
+class Animal{
 private:
     std::string espece;
     double poids;
