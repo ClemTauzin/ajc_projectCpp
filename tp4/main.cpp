@@ -2,6 +2,9 @@
 #include <string>
 #include <vector>
 
+#define PRINT_FUNC
+
+
 
 class Shop {
     protected:
@@ -9,6 +12,7 @@ class Shop {
         std::string city;
         int hOpen;
         int hClose;
+        std::vector<Consumable*> ConsumableList;
     public:
         Shop(const std::string _name, std::string _city, int _hOpen, int _hClose) : name(_name), city(_city), hOpen(_hOpen), hClose(_hClose){}
 
@@ -38,37 +42,80 @@ class Pub : public Shop {
 
 };
 
+class Consumable
+{
+protected:
+	std::string m_Name;
+	std::string m_Ingredient;
 
-class LetsGoOut{
-        private:
-            std::vector<Shop*> Shop;
-            std::vector<Consumable*> Consumable;
-        public:
-            void addShop(Shop* shop){
-                Shop.push_back(shop);
-            }
-            void addConsumable(Consumable* consumable){
-                Consumable.push_back(consumable);
-            }
-            void diplayAllInfo(){
-                for (int i = 0; i < Shop.size(); i++)
-                {
-                    Shop[i]->displayInfo();
-                    Consumable[i]->displayInfo();
-                }
-            }
-                        void diplayInfo(){
-                for (int i = 0; i < Shop.size(); i++)
-                {
-                    Shop[i]->displayInfo();
-                    Consumable[i]->displayInfo();
-                }
-            }
+public:
+	Consumable(std::string name) : m_Name(name),m_Ingredient(0) { PRINT_FUNC }	
+	explicit Consumable(std::string ingredient) :m_Name("unknown"), m_Ingredient(ingredient) { PRINT_FUNC }
+	Consumable(std::string name, std::string ingredient) : m_Name(name), m_Ingredient(ingredient) { PRINT_FUNC }
 
-        ~LetsGoOut(){
-            std::cout<<"Mémoire LetsGoOut effacée"<<std::endl;
-        };
+	virtual ~Consumable(){ PRINT_FUNC }
+
+	virtual void displayCaract() = 0;
 };
+
+class Food :public Consumable{
+public:
+
+    Food(std::string name) : Consumable(name) { PRINT_FUNC }
+    Food(std::string ingredient) : Consumable(ingredient) { PRINT_FUNC }
+    Food(std::string name, std::string ingredient) : Consumable(name, ingredient) { PRINT_FUNC }
+
+    ~Food() { PRINT_FUNC }
+
+    void displayCaract() override
+    {
+        std::cout << "Food name : " << m_Name << " | ingredients : " << m_Ingredient << std::endl;
+    }
+
+
+};
+
+class Drink : public Consumable{
+    public:
+        Drink(std::string name);
+        explicit Drink(std::string ingredient);
+        Drink(std::string name, int quantity);
+
+        Drink(std::string name) : Consumable(name){ PRINT_FUNC }
+        Drink(std::string ingredient) : Consumable(ingredient) { PRINT_FUNC }
+        Drink(std::string name, std::string ingredient) : Consumable(name,ingredient) { PRINT_FUNC }
+
+        ~Drink(){ PRINT_FUNC }
+
+        void displayCaract() override {
+            std::cout << "Drink name : " << m_Name << " | quantity : " << m_Ingredient << std::endl;
+        }
+};
+
+// class LetsGoOut{
+//         private:
+//             std::vector<Shop*> Shops;
+//             std::vector<Consumable*> Consumables;
+//         public:
+//             void addShop(Shop* shop){
+//                 Shop.push_back(shop);
+//             }
+//             void addConsumable(Consumable* consumable){
+//                 Consumable.push_back(consumable);
+//             }
+//             void diplayAllInfo(){
+//                 for (int i = 0; i < Shop.size(); i++)
+//                 {
+//                     Shop[i]->displayInfo();
+//                     Consumable[i]->displayInfo();
+//                 }
+//             }
+
+
+//         ~LetsGoOut(){
+//             std::cout<<"Mémoire LetsGoOut effacée"<<std::endl;
+//         };
+// };
 
 
 int main() {
