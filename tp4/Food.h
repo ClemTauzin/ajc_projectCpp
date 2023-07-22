@@ -1,20 +1,14 @@
 #pragma once
 #include "Consumable.h"
 
-
-
-
-class Food :public Consumable
-
-{
-
+class Food : public Consumable
+{    
 
 public:
-    Food(std::string name);
-    explicit Food(int quantity);
-    Food(std::string name, int quantity);
+
+    Food(std::string name, std::string ingredient);
 
     ~Food();
 
-    void displayInfo() override const;
+    void displayInfo() const override;
 };

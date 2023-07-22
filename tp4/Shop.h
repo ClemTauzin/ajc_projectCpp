@@ -9,6 +9,9 @@ class Shop {
         std::string name;
         int hOpen;
         int hClose;
+
+        // std::vector<Consumable*> consumableList;
+
     public:
         Shop(const std::string _name, int _hOpen, int _hClose) : name(_name), hOpen(_hOpen), hClose(_hClose){}
 
