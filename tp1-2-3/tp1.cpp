@@ -3,13 +3,15 @@
 #include <string>
 #include <vector>
 
+int a = 0;
+
 class Service {
     protected:
         std::string nomService;
         double prixService;
 
     public:
-    Service (const std::string& _nomService, int _prixService) : nomService(_nomService), prixService(_prixService) {};
+    Service (const std::string& _nomService, int _prixService) : nomService(_nomService), prixService(_prixService) {a++;};
 
     virtual void afficherDetails(){
         std::cout<<"Nom du service : "<< nomService << " ----> Prix (en €): " << prixService << std::endl;
@@ -61,6 +63,7 @@ int main() {
     NewCenter.ajoutService(&service2);
     NewCenter.ajoutService(&service3);
     NewCenter.afficherServices();
-    
+    std::cout<<"nb service : "<< a <<std::endl;
+
     return 0;
 }
