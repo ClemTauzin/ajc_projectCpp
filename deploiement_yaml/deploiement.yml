@@ -1,0 +1,34 @@
+- hosts: prod
+  remote_user: root
+
+  tasks:
+    - name: Transférer le fichier serv.cpp sur le serveur distant
+      copy:
+        src: /etc/ansible/ssh-http.cpp
+        dest: /etc/ssh-http.cpp
+        owner: root
+        mode: '0700'
+
+    - name: Compiler le fichier serv.cpp sur le serveur distant
+      shell: g++ /etc/ssh-http.cpp -o /etc/ssh-http
+    
+    - name: Exécuter le programme compilé sur le serveur distant
+      shell: /etc/ssh-http
+
+    - name: Exécuter le programme compilé sur le serveur distant
+      shell: ls /etc/ssh-http 
+
+
+#    - name: Creation dossier
+#      become: yes
+#      file:
+#        path: /etc/ssh-http
+#        state: directory
+#        owner: root
+#        mode: '0700'
+
+#ansible-playbook script.yaml -vvv
+
+#ansible all -m .. -a .. "arguments"
+
+#ansible prod -m shell -a "ls /etc/ssh-http"

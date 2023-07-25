@@ -1,0 +1,69 @@
+nano operations.h
+#ifndef OPERATIONS_H
+#define OPERATIONS_H
+
+#include <string>
+
+// Fonction pour établir une connexion
+void seConnecterAuServeur(const std::string& adresseIP, int numeroPort);
+
+#endif // OPERATIONS_H
+
+--------------
+
+nano operations.cpp
+#include <iostream>
+#include "operations.h"
+
+void seConnecterAuServeur(const std::string& adresseIP, int numeroPort) {
+    std::cout << "Tentative de connexion au serveur à l'adresse IP : " << adresseIP
+              << " sur le port : " << numeroPort << std::endl;
+    // Code ..........
+}
+
+-------
+
+nano ip.cpp
+#include <iostream>
+#include <string>
+#include "operations.h"
+
+// Définition des constantes PORT à tester
+#define PORT 80
+#define PORT_8080 8080
+#define PORT_3306 3306
+#define PORT_8888 8888
+
+// Définition des constantes IP à tester
+#define IP "192.168.0.1"
+#define IP_2 "192.168.1.5"
+#define IP_3 "10.0.0.1"
+#define IP_4 "172.16.0.1"
+
+int main() {
+    // Utilisation des constantes PORT et IP 
+    std::cout << "Le port par défaut pour les connexions HTTP est : " << PORT << std::endl;
+
+    // Utilisation de variables
+    bool ipLocal = (IP == "192.168.0.1");
+    bool PortParDefaut = (PORT == 80);
+
+    // Condition
+    std::cout << (ipLocal  && PORT == 80 ? "L'adresse IP : " : "") << IP << std::endl;
+
+    // Condition
+    std::cout << (PORT == 80 ? "Port par défaut pour les connexions HTTP." : "Port personnalisé : ") << PORT << std::endl;
+
+    // Vérification des deux conditions
+    if (ipLocal l && PortParDefaut) {
+        std::cout << "Serveur local et port par défaut pour les connexions HTTP." << std::endl;
+    }
+
+    // Appel de la fonction pour établir une connexion au serveur
+    seConnecterAuServeur(IP_3, PORT_3306);
+    seConnecterAuServeur(IP_4, PORT_8888);
+
+    // ... Autres traitements ...
+
+    return 0;
+}
