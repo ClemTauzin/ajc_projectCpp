@@ -10,9 +10,7 @@
 class CabinetMedical{
 
     std::vector<Patient*> patients;
-    std::vector<PatientUrgence*> patients;
-    std::vector<PatientNeuro*> patients;
-    std::vector<PatientGastro*> patients;
+
 
     public :
 
