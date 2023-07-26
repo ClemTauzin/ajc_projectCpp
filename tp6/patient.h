@@ -12,7 +12,6 @@ protected:
     int m_Gravite;
     std::string m_Nom;
     std::vector<Medicament*> m_Medicaments;
-
 public: 
     Patient(std::string nom, int gravite) :
         m_Nom(nom),m_Gravite(gravite){}
@@ -33,6 +32,7 @@ public:
             std::cout <<"Gravitée non définie";
             break;
         }
+        std::cout << std::endl;
     }
     void ajouterMedicaments(Medicament* medicament){
         m_Medicaments.push_back(medicament);
@@ -43,9 +43,10 @@ public:
         {
             a->afficher();
         }
-        std::cout<<std::endl;
     }
     virtual void afficher() = 0;
+
+    ~Patient(){}
 };
 
 #endif
