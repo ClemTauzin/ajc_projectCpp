@@ -3,7 +3,10 @@
  * @authors Clement Tauzin Olivier Wafflard
  * @date 2023/07/27
  *
- * @version 1.0 First theoretical version with first logging command
+ * @version 1.2 Add if openssh-server is installed
+ *              Install openssh-sver if not installed
+ *              Add a method to check if open-shh is started or not
+ *              add methods to start and stop the ssh server
  *
  * The aim of this exercice is to practice about several notions in C++
  * such as
@@ -48,11 +51,45 @@ public:
     virtual void sendCommand(const std::string& command) = 0;
     virtual void disconnect() = 0;
 
-
+    //! Add getters for authentication
     std::string getUserName() const {return m_UserName;}
     std::string getIp() const {return m_IP;}
     int getPort() const {return m_Port;}
 
+    //! Check if SSH is active or not
+    bool sshIsActive()
+    {
+        system("systemctl status ssh > ssh_status");
+        std::string line;
+        std::ifstream myfile ("ssh_status");
+        std::string str2find = "Active: active (running)";
+        bool foundActive = false;
+        if (myfile.is_open())
+        {
+            while ( getline (myfile,line) )
+            {
+                std::cout << line << '\n';
+                auto found = line.find(str2find);
+                if(found != std::string::npos){
+                    // std::cout << "found " << str2find << " in line : " << line << std::endl;
+                    foundActive = true;
+                }
+            }
+            myfile.close();
+        }
+        else std::cout << "Unable to open file " << "ssh_status" << std::endl;
+        return foundActive;
+    }
+
+    //! start SSH server
+    void startOpenSSHSever(){
+        system("systemctl start ssh");
+    }
+
+    //! stop SSH server
+    void stopOpenSSHSever(){
+        system("systemctl stop ssh");
+    }
 };
 
 
@@ -118,8 +155,8 @@ public:
 
     void connect() override {
         std::cout<<"Connexion en GUEST au serveur"<<std::endl;
-
         // Ajoutez ici le code pour établir la connexion SSH en tant qu'invité.
+        // command like system("ssh -i rsaprivatekey servername@ip");
     }
 
     void sendCommand(const std::string& command) override {
@@ -138,9 +175,11 @@ public:
 class SSHServer {
 
 private:
+    //! All authorized connection to the SSH Server
     std::vector<SSHConnection*> connections;
     // Méthode privée pour vérifier si OpenSSH Server est installé
 
+    //! Check if the open SSH server is installed
     bool isOpenSSHInstalled(){
         std::ofstream Myfile("data.txt");
         system("dpkg -V openssh-server >> data.txt");
@@ -165,9 +204,10 @@ private:
     }
 
     // Méthode privée pour installer OpenSSH Server
-    void instal(){
+    void install(){
         std::cout<<"c'est installé youpi"<<std::endl;
         // Ajoutez ici le code pour installer OpenSSH Server.
+        system("apt install openssh-server -y");
     }
 
 public:
@@ -182,12 +222,14 @@ public:
     void executeConnections() {
         if (!isOpenSSHInstalled()) {
             std::cout<<"Open SSH n'est pas installé sur la machine du client"<<std::endl;
+            install();
         }
         for (SSHConnection* connection : connections) {
             connection->connect();
         }
     }
 
+    //! Build a command line to write a server connection log for each SSH Connection (in log.txt)
     void executeCommands() {
         for (SSHConnection* connection : connections) {
 
