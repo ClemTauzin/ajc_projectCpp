@@ -26,6 +26,7 @@
 #include <string>
 #include <vector>
 #include <typeinfo>
+#include <fstream>
 
 
 /**
@@ -141,10 +142,26 @@ private:
     // Méthode privée pour vérifier si OpenSSH Server est installé
 
     bool isOpenSSHInstalled(){
-        // Ajoutez ici le code pour vérifier si OpenSSH Server est installé.
-        // Vous pouvez utiliser la méthode privée installOpenSSHServer()
-        // pour installer OpenSSH Server automatiquement si nécessaire.
-        return true;
+        std::ofstream Myfile("data.txt");
+        system("dpkg -V openssh-server >> data.txt");
+
+        std::string data;
+        std::ifstream MyReadFile("data.txt");
+        getline(MyReadFile, data);
+
+        Myfile.close();
+        MyReadFile.close();
+
+        system("rm data.txt");
+
+        if (data == "")
+        {
+            std::cout<<"true"<<std::endl;
+            return true;
+        }else{
+            std::cout<<"false"<<std::endl;
+            return false;
+        }    
     }
 
     // Méthode privée pour installer OpenSSH Server
