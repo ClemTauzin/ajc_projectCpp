@@ -1,5 +1,8 @@
 #ifndef PATIENT_H
 #define PATIENT_H
+#define R "Rouge"
+#define O "Orange"
+#define V "Vert"
 
 #include <iostream>
 #include <string>
@@ -20,13 +23,13 @@ public:
         switch (m_Gravite)
         {
         case 1:
-            std::cout << "Rouge";
+            std::cout << R;
             break;
         case 2:
-            std::cout << "Orange";
+            std::cout << O;
             break;
         case 3:
-            std::cout << "Vert";
+            std::cout << V;
             break;        
         default:
             std::cout <<"Gravitée non définie";

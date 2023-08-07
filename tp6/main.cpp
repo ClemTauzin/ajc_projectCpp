@@ -9,8 +9,9 @@
 
 class CabinetMedical{
 
+    private :
+    
     std::vector<Patient*> patients;
-
 
     public :
 

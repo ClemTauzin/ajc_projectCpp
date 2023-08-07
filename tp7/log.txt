@@ -1,4 +1,0 @@
-John Doe ; 192.168.1.6 ;  jeu. 27 juil. 2023 17:05:53 CEST
-Malika ; 192.168.1.7 ;  jeu. 27 juil. 2023 17:05:53 CEST
-user ; 192.168.1.1 ;  jeu. 27 juil. 2023 17:05:53 CEST
-admin ; 192.168.1.2 ;  jeu. 27 juil. 2023 17:05:53 CEST

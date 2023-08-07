@@ -1,0 +1,30 @@
+appli de recette de cuisine
+
+
+Partie Gestion des aliments :
+    -> ajout d'aliment dans le frigo
+        pointeur/vecteur : frigo
+
+    -> class aliment (abstraite) :
+        - vegetebale
+            -DLU
+            -nom
+            -provenance
+        - meat  
+        - fruits
+
+    -> fonction affichant les aliments qui vont se perdre bientot en entrant la date du jour
+    -> fonction permettant de voir tout ce qui est présent dans le frigo.
+
+#Partie création de recette :
+#    -> création d'objet classse recette :
+#        -nom
+#        -vecteur aliments ?
+#        -vecteur aliments
+
+Suppression des aliments du frigo quand la recette est créée ?
+
+    utilisation de template ?
+    installation biblio et fichier externe ?
+    utilisation ansible ?
+    action git ? log des recettes crées ?
